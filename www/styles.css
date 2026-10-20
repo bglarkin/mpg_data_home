@@ -1,0 +1,23 @@
+body { background: #f5f6f2; color: #24382f; }
+.home-shell { max-width: 1120px; margin: 0 auto; padding: 3.5rem 1.25rem 2rem; }
+.home-header { max-width: 780px; margin-bottom: 2.25rem; }
+.eyebrow { color: #315a48; font-size: .8rem; letter-spacing: .16em; font-weight: 700; margin-bottom: .6rem; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -.035em; }
+.intro { font-size: 1.2rem; line-height: 1.6; margin-top: 1rem; }
+.link-hint, .resource-credit { color: #526359; font-size: .9rem; }
+.resource-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+.resource-card { background: #fff; border: 1px solid #dce3dc; border-radius: .65rem; padding: 1.7rem; display: flex; flex-direction: column; }
+.resource-card h2 { font-size: 1.4rem; font-weight: 700; line-height: 1.3; margin-bottom: .5rem; }
+.resource-description { line-height: 1.65; }
+.resource-update { padding: .8rem 1rem; border-left: 3px solid #8a6526; background: #faf4e8; color: #61491f; font-size: .9rem; line-height: 1.5; }
+.resource-links { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: auto; padding-top: .6rem; }
+.resource-links a:not(.btn), .home-footer a { color: #29533f; text-decoration: underline; text-underline-offset: .18em; }
+a:focus-visible { outline: 3px solid #a76913; outline-offset: 4px; }
+.home-footer { border-top: 1px solid #d3dcd3; margin-top: 2.5rem; padding-top: 1.8rem; }
+.home-footer h2 { font-size: 1.2rem; font-weight: 700; }
+.home-footer p { margin-bottom: .5rem; }
+@media (max-width: 680px) {
+  .home-shell { padding-top: 2rem; }
+  .resource-grid { grid-template-columns: 1fr; }
+  .resource-card { padding: 1.3rem; }
+}
