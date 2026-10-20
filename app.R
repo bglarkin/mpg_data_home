@@ -5,6 +5,17 @@ library(bslib)
 
 resources <- list(
   list(
+    title = "Front Country Aerial Imagery Viewer",
+    credit = "Designed by Kyle Doherty",
+    description = paste(
+      "This tool displays all aerial imagery available at MPG Ranch, both fixed wing and UAS-based,
+      since 2011. Users may view and compare sets of imagery and create point and polygon overlays for 
+      export and use in GIS software, designing Emlid Flow GPS surveys, or drone survey missions."
+    ), 
+    url = "https://huggingface.co/spaces/mpg-ranch/aerial-imagery",
+    source = "https://huggingface.co/spaces/mpg-ranch/aerial-imagery/tree/main"
+  ),
+  list(
     title = "MPG Weather Data",
     credit = "Designed by Erik Samsoe",
     description = paste(
@@ -95,38 +106,60 @@ resource_card <- function(resource) {
       class = "resource-links",
       external_link(paste("Open", resource$title), resource$url, "btn btn-primary"),
       if (!is.null(resource$source)) external_link("Source on GitHub", resource$source)
-    )
+    ),
+    tags$div(class = "section-gap")
   )
 }
 
-ui <- page_fluid(
-  title = "MPG Data Home",
-  theme = bs_theme(version = 5, bootswatch = "flatly", primary = "#315a48"),
-  tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")),
-  tags$div(
-    class = "home-shell",
-    tags$header(
-      class = "home-header",
-      tags$p(class = "eyebrow", "MPG RANCH"),
-      tags$h1("MPG Data Home"),
-      tags$p(class = "intro", "A starting point for MPG staff to find data, explore tools, and plan field work."),
-      tags$p(class = "link-hint", "Resource links open in a new tab.")
-      # Future images in www/ can be added here with tags$img(src = "logo.png", alt = "MPG Ranch").
-    ),
-    tags$main(
-      id = "resources",
-      `aria-label` = "Staff resources",
-      tags$div(class = "resource-grid", lapply(resources, resource_card))
-    ),
-    tags$footer(
-      class = "home-footer",
-      tags$h2("Help keep this page useful"),
-      tags$p("Have a new tool to share, a broken link, or a suggestion?"),
-      if (nzchar(feedback_email)) {
-        tags$a("Email feedback", href = feedback_url)
-      } else {
-        external_link("Share feedback on GitHub", feedback_url)
-      }
+# UI ———————— ####
+ui <- tagList(
+  tags$head(
+    tags$style(HTML("
+            .section-gap {
+                margin-top: 3rem;
+                margin-bottom: 3rem;
+            }
+
+            .subtle-divider {
+                border-top: 1px solid rgba(0, 0, 0, 0.08);
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+        "))
+  ),
+
+  page_fluid(
+    title = "MPG Data Home",
+    theme = bs_theme(version = 5, bootswatch = "flatly", primary = "#315a48"),
+    tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")),
+    tags$div(
+      class = "home-shell",
+      tags$header(
+        class = "home-header",
+        tags$p(class = "eyebrow", "MPG RANCH"),
+        tags$h1("MPG Data Home"),
+        tags$p(class = "intro", "A starting point for MPG staff to find data, explore tools, and plan field work."),
+        tags$p(class = "link-hint", "Resource links open in a new tab."),
+        # Future images in www/ can be added here with tags$img(src = "logo.png", alt = "MPG Ranch").
+        tags$div(class = "subtle-divider"),
+        tags$div(class = "section-gap")
+      ),
+      tags$main(
+        id = "resources",
+        `aria-label` = "Staff resources",
+        tags$div(class = "resource-grid", lapply(resources, resource_card))
+      ),
+      tags$footer(
+        class = "home-footer",
+        tags$div(class = "section-gap"),
+        tags$h2("Help keep this page useful"),
+        tags$p("Have a new tool to share, a broken link, or a suggestion?"),
+        if (nzchar(feedback_email)) {
+          tags$a("Email feedback", href = feedback_url)
+        } else {
+          external_link("Share feedback on GitHub", feedback_url)
+        }
+      )
     )
   )
 )
